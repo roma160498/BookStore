@@ -1,0 +1,7 @@
+
+public class UserAction {
+	public UserAction()
+	{}
+	public bool registrate(User user)
+	{}
+}

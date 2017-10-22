@@ -1,0 +1,38 @@
+import java.io.*;
+import java.util.ArrayList;
+public class AdminBase {
+	private ArrayList<Admin> adminsList = new ArrayList<Admin>();
+	public AdminBase()
+	{
+		try(BufferedReader reader = new BufferedReader(new FileReader("admins.txt")))
+		{
+			do{
+				Admin admin = new Admin();
+				admin.setName(reader.readLine());
+				admin.setSurname(reader.readLine());
+				admin.setEmail(reader.readLine());
+				admin.setPassword(reader.readLine());
+				adminsList.add(admin);
+			}while (reader.readLine()!=null);
+		}
+		catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public boolean check(Admin admin)
+	{
+		for (Admin adminItem:adminsList)
+		{
+			if (adminItem.getLogin()==admin.getLogin())
+				return false;
+		}
+		return true;
+	}
+	public void add(Admin admin)
+	{
+		adminsList.add(admin);
+		
+	}
+
+}

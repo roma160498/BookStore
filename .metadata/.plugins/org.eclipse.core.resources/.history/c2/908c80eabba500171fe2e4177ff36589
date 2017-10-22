@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main()
+	{
+		int enterMode;
+		System.out.println("1-Registration\n2-Authorization");
+		Scanner scn = new Scanner(System.in);
+		enterMode = scn.nextInt();
+		if (enterMode==1)
+		{
+			User user = new User();
+			user.setName(scn.nextLine());
+			user.setSurname(scn.nextLine());
+			user.setEmail(scn.nextLine());
+			user.setPassword(scn.nextLine());
+			UserAction uAction = new UserAction();
+			uAction.registrate();
+		}
+		if (enterMode==2)
+		{
+			String name = scn.nextLine();
+			String surname = scn.nextLine();
+			String email = scn.nextLine();
+			String password = scn.nextLine();
+			Admin admin = new Admin(name,surname,email,password);
+		}
+	}
+}

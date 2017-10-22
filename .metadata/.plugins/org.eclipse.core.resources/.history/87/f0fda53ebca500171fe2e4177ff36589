@@ -1,0 +1,13 @@
+
+public class AdminAction extends UserAction {
+	public AdminAction()
+	{}
+	@Override
+	public bool registrate(Admin admin)
+	{
+		AdminBase adBase = new AdminBase();
+		if (!adBase.check(admin))
+			return false;
+		
+	}
+}

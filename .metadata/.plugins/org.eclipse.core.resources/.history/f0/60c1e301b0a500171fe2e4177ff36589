@@ -1,0 +1,20 @@
+public class PaperBook extends Book{
+	Integer pageSize;
+	String format;
+	public PaperBook(String bookName,String author,Integer pageSize,String format,Integer year)
+	{
+		this.bookName = bookName;
+		this.author = author;
+		this.pageSize = pageSize;
+		this.format = format;
+		this.year = year;
+	}
+	public Integer getPageSize()
+	{
+		return pageSize;
+	}
+	public String getFormat()
+	{
+		return format;
+	}
+}

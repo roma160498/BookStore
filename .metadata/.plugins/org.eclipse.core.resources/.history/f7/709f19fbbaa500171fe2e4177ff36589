@@ -1,0 +1,13 @@
+import java.io.*;
+import java.util.ArrayList;
+public class AdminBase {
+	private ArrayList<Admin> adminsList = new ArrayList<Admin>();
+	public AdminBase()
+	{
+		try(BufferedReader reader = new BufferedReader(new FileReader("admins.txt"))
+		{
+			Admin admin = new Admin();
+			admin.
+		}
+	}
+}

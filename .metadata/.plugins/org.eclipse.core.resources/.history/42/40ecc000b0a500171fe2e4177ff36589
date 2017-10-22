@@ -1,0 +1,15 @@
+public class Ebook extends Book{
+	Integer mbSize;
+	public Ebook(String bookName,String author,Integer mbSize,Integer year)
+	{
+		this.bookName = bookName;
+		this.author = author;
+		this.mbSize = mbSize;
+		this.year = year;
+	}
+	public Integer getMbSize()
+	{
+		return mbSize;
+	}
+	
+}
