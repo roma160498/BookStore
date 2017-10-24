@@ -12,7 +12,7 @@ public class Main {
 		Controller controller = new Controller();
 		String response;
 		boolean authFlag=false;
-		User user;
+		User user = null;
 		Scanner scn = new Scanner(System.in);
 		String way;
 		do{
@@ -85,7 +85,68 @@ public class Main {
 			}
 			}
 		}while(!authFlag);
-		
+		if (authFlag)
+		{
+			System.out.println("====CHOOSE ACTION====");
+			System.out.println("1-Watch the lsit of books");
+			System.out.println("2-Find book");
+			if (user.getIsAdmin()==true)
+			{
+				System.out.println("3-Delete book");
+				System.out.println("4-Add book");
+				System.out.println("5-Change book information");
+			}
+			String action = scn.nextLine();
+			switch (action)
+			{
+			case "1":
+			case "2":
+			case "3":
+			case "4":
+				String tempString="";
+				System.out.println("1-Paper book");
+				System.out.println("2-Electronic book");
+				action = scn.nextLine();
+				switch (action)
+				{
+				case "1":
+					System.out.println("Book Name:");
+					tempString = scn.nextLine()+"|";
+					System.out.println("Author:");
+					tempString += scn.nextLine()+"|";
+					System.out.println("Year of creation:");
+					tempString += scn.nextLine()+"|";
+					System.out.println("Amount of pages:");
+					tempString += scn.nextLine()+"|";
+					System.out.println("Amount of books:");
+					tempString += scn.nextLine()+"|1";
+					response = controller.doAction("add_book|"+tempString);
+					if (!response.equals("OK"))
+						System.out.println(response);
+					break;
+				case "2":
+					tempString="";
+					System.out.println("Book Name:");
+					tempString = scn.nextLine()+"|";
+					System.out.println("Author:");
+					tempString += scn.nextLine()+"|";
+					System.out.println("Year of creation:");
+					tempString += scn.nextLine()+"|";
+					System.out.println("Size in MB:");
+					tempString += scn.nextLine()+"|";
+					System.out.println("Format:");
+					tempString += scn.nextLine()+"|2";
+					response = controller.doAction("add_book|"+tempString);
+					if (!response.equals("OK"))
+						System.out.println(response);
+					break;
+				}
+				break;
+			case "5":
+			}
+			
+			
+		}
 		
 		
 
