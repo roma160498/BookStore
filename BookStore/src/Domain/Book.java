@@ -4,6 +4,8 @@ public class Book {
 	String bookName;
 	String author;
 	Integer year;
+	String bookType;
+	
 	public String getBookName()
 	{
 		return bookName;
@@ -16,6 +18,10 @@ public class Book {
 	{
 		return year;
 	}
+	public String getBookType()
+	{
+		return bookType;
+	}
 	public void setBookName(String bookName)
 	{
 		this.bookName = bookName;
@@ -27,5 +33,9 @@ public class Book {
 	public void setYear(Integer year)
 	{
 		this.year = year;
+	}
+	public void setBookType(String bookType)
+	{
+		this.bookType = bookType;
 	}
 }
