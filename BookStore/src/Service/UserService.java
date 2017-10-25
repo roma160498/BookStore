@@ -1,6 +1,7 @@
 package Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import DAO.DAOFactory;
 import DAO.UserDAO;
@@ -31,5 +32,17 @@ public class UserService {
 			throw new ServiceException(ex.getMessage(), ex);
 		} 
 		return user;
+	}
+	
+	public ArrayList<String> getEmails() throws ServiceException {
+		DAOFactory factory = DAOFactory.getInstance();
+		UserDAO userDAO = factory.getUserDAO();
+		ArrayList<String> emailsList;
+		try {
+			emailsList = userDAO.getEmails();
+		} catch (DAOException ex) {
+			throw new ServiceException(ex.getMessage(), ex);
+		} 
+		return emailsList;
 	}
 }

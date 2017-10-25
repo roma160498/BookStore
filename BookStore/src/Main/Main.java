@@ -17,6 +17,7 @@ public class Main {
 		User user = null;
 		Scanner scn = new Scanner(System.in);
 		String way;
+		
 		do{
 		System.out.println("1-Registration;2-Authorization");
 		way = scn.nextLine();
@@ -277,6 +278,21 @@ public class Main {
 					else
 						System.out.println("Completed!");
 					break;
+				}
+				System.out.println("Do you want send letters? 1-yes, 2-no");
+				action = scn.nextLine();
+				if (action.equals("1"))
+				{
+					String requestForSending="";
+					System.out.println("Input your email");
+					requestForSending = scn.nextLine()+"|";
+					System.out.println("Input password from email");
+					requestForSending += scn.nextLine();
+					response  = controller.doAction("send_emails|"+requestForSending+"|"+tempString);
+					if (response.equals("OK"))
+						System.out.println("Completed!");
+					else
+						System.out.println("Error during sending process!");
 				}
 				break;
 			case "5":

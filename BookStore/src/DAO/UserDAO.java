@@ -11,6 +11,8 @@ import java.io.IOException;
 
 
 
+import java.util.ArrayList;
+
 import Domain.User;
 
 public class UserDAO {
@@ -69,5 +71,27 @@ public class UserDAO {
 			throw new DAOException("Opening file exception", ex);
 		}
 		return user;
+	}
+	
+	public ArrayList<String> getEmails() throws DAOException {
+		ArrayList<String> emailsList = new ArrayList<String>();
+		try(BufferedReader reader = new BufferedReader(new FileReader("users.txt")))
+		{
+			
+			String name;
+			do{
+				name = reader.readLine();
+				if (name==null)
+					break;
+				emailsList.add(reader.readLine());
+				reader.readLine();
+				reader.readLine();
+				reader.readLine();
+			}while (true);
+		}
+		catch (IOException ex) {
+			throw new DAOException("Opening file exception", ex);
+		}
+		return emailsList;
 	}
 }
