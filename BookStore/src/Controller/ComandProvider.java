@@ -7,7 +7,9 @@ import Controller.command.Command;
 import Controller.command.implementation.AddBookCommand;
 import Controller.command.implementation.DelBookCommand;
 import Controller.command.implementation.SearchBooksCommand;
+import Controller.command.implementation.SendEmailsCommand;
 import Controller.command.implementation.ShowBooksCommand;
+import Controller.command.implementation.UpdateBookCommand;
 import Controller.command.implementation.UserLogCommand;
 import Controller.command.implementation.UserRegCommand;
 
@@ -21,6 +23,8 @@ class CommandProvider {
 		commands.put("del_book", new DelBookCommand());
 		commands.put("show_books", new ShowBooksCommand());
 		commands.put("search_books", new SearchBooksCommand());
+		commands.put("update_book", new UpdateBookCommand());
+		commands.put("send_emails", new SendEmailsCommand());
 	}
 
 	Command getCommand(String commandName) {

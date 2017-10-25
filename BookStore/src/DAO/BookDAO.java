@@ -146,4 +146,62 @@ public class BookDAO {
 		}
 		return listBooks;
 	}
+	public boolean updateBook(String id,String name, String author, String year, String type) throws DAOException {
+
+		boolean isExist=false;
+		ArrayList<Book> listBooks = new ArrayList<Book>();
+			try(BufferedReader reader = new BufferedReader(new FileReader("books.txt")))
+			{
+				String currentName;
+				do{
+					Book book = new Book();
+					currentName = reader.readLine();
+					if (currentName==null)
+						break;
+					book.setBookName(currentName);
+					book.setAuthor(reader.readLine());
+					book.setYear(Integer.parseInt(reader.readLine()));
+					book.setBookType(reader.readLine());
+					listBooks.add(book);
+				}while(true);
+			}
+		    catch(FileNotFoundException ex){
+		    	throw new DAOException("File not found.", ex);
+		    } catch (IOException ex) {
+		    	throw new DAOException("Error during updating", ex);
+			}
+			if (Integer.parseInt(id)-1>listBooks.size())
+				return false;
+			Book book = listBooks.get(Integer.parseInt(id)-1);
+			if (!name.equals("."))
+				book.setBookName(name);
+			if (!author.equals("."))
+				book.setAuthor(author);
+			if (!year.equals("."))
+				book.setYear(Integer.parseInt(year));
+			if (!type.equals("."))
+				book.setBookType(type);
+			
+			try(BufferedWriter bw = new BufferedWriter(new FileWriter("books.txt")))
+	        {
+				for (Book bookItem : listBooks) {
+				  bw.write(bookItem.getBookName());
+				  bw.newLine();
+		          bw.write(bookItem.getAuthor());
+				  bw.newLine();
+		          bw.write(bookItem.getYear().toString());
+		          bw.newLine();
+		          bw.write(bookItem.getBookType());
+		          bw.newLine();
+				}
+		    }
+		    catch(FileNotFoundException ex){
+		    	throw new DAOException("File not found.", ex);
+		    } catch (IOException ex) {
+		    	throw new DAOException("Error during updating", ex);
+			} 
+			return true;
+		}
+
+
 }

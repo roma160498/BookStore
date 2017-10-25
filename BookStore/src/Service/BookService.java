@@ -55,5 +55,14 @@ public class BookService {
 			throw new ServiceException(e.getMessage(), e);
 		}
 	}
-	
+	public boolean updateBook(String id,String name, String author, String year, String type) throws ServiceException {
+		DAOFactory factory = DAOFactory.getInstance();
+		BookDAO bookDAO = factory.getBookDAO();
+		
+		try {
+			return bookDAO.updateBook(id,name,author,year,type);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e);
+		}
+	}
 }

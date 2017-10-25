@@ -114,7 +114,7 @@ public class Main {
 					System.out.println("There are not any books");
 				else
 				{
-					int pageCounter=0;
+					int pageCounter=1;
 					int booksOnPage=3;
 					int endOfPage=3;
 					String[] books = response.split("\\|");
@@ -130,32 +130,47 @@ public class Main {
 						book.setBookType(bookAttributes[3]);
 						bookList.add(book);
 					}
-					int pagesAmount = bookList.size()/booksOnPage + 1;
+					int pagesAmount = bookList.size()/booksOnPage;
+					if (bookList.size()%booksOnPage==0)
+						pagesAmount = bookList.size()/booksOnPage;
+					else
+						pagesAmount = bookList.size()/booksOnPage + 1;
+					
+					if (bookList.size()<=booksOnPage)
+						endOfPage = bookList.size();
+					else
+						endOfPage = booksOnPage*(pageCounter-1)+booksOnPage;
+					
+					
 					do{
-					for (int i = pageCounter*booksOnPage; i<pageCounter*booksOnPage+endOfPage;i++)
+
+					for (int i = (pageCounter-1)*booksOnPage; i<endOfPage;i++)
 					{
 						System.out.println(String.valueOf(i+1)+") "+bookList.get(i).getBookName());
 						System.out.println(bookList.get(i).getAuthor());
 						System.out.println(bookList.get(i).getYear());
 						System.out.println(bookList.get(i).getBookType());
 					}
-					
 					System.out.println("a-previous page, d-next page,q-exit");
 					action = scn.nextLine();
 					if (action.equals("a"))
 					{
-						if (pageCounter!=0)
+						if (pageCounter!=1)
 							pageCounter--;
 					}
 					if (action.equals("d"))
-						if (pageCounter!=pagesAmount-1)
-						pageCounter++;
+						if (pageCounter!=pagesAmount)
+							pageCounter++;
 					if (action.equals("q"))
 						break;
-					if (pageCounter==pagesAmount-1)
-						endOfPage = bookList.size() % booksOnPage;
+					
+					if (pageCounter==pagesAmount)
+						if(bookList.size() % booksOnPage!=0)
+						endOfPage = booksOnPage*(pageCounter-1)+ bookList.size() % booksOnPage;
+						else
+							endOfPage = booksOnPage*(pageCounter-1)+booksOnPage;
 					else
-						endOfPage=3;
+						endOfPage = booksOnPage*(pageCounter-1)+booksOnPage;
 					}while(true);
 				}
 				break;
@@ -265,6 +280,24 @@ public class Main {
 				}
 				break;
 			case "5":
+				System.out.println("====Updating====");
+				System.out.println("Input Book ID");
+				String bookID = scn.nextLine();
+				tempString="";
+				System.out.println("Input new book name");
+				tempString += scn.nextLine()+"|";
+				System.out.println("Input new book author");
+				tempString += scn.nextLine()+"|";
+				System.out.println("Input new year of creation");
+				tempString += scn.nextLine()+"|";
+				System.out.println("Input new type");
+				tempString += scn.nextLine()+"|";
+				response = controller.doAction("update_book|"+bookID+"|"+tempString);
+				if (!response.equals("OK"))
+					System.out.println(response);
+				else
+					System.out.println("Completed!");
+				break;
 			}
 			}while(true);
 			
