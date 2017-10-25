@@ -45,5 +45,15 @@ public class BookService {
 			throw new ServiceException(e.getMessage(), e);
 		}
 	}
+	public ArrayList<Book> searchBooks(String param, String searchingType) throws ServiceException {
+		DAOFactory factory = DAOFactory.getInstance();
+		BookDAO bookDAO = factory.getBookDAO();
+		
+		try {
+			return bookDAO.searchBooks(param,searchingType);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e);
+		}
+	}
 	
 }

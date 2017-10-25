@@ -113,4 +113,37 @@ public class BookDAO {
 		}
 		return listBooks;
 	}
+	
+	public ArrayList<Book> searchBooks(String param, String searchingType) throws DAOException{
+		ArrayList<Book> listBooks = new ArrayList<Book>();
+		try(BufferedReader reader = new BufferedReader(new FileReader("books.txt")))
+		{
+			String currentName;
+			do{
+				Book book = new Book();
+				currentName = reader.readLine();
+				if (currentName==null)
+					break;
+				book.setBookName(currentName);
+				book.setAuthor(reader.readLine());
+				book.setYear(Integer.parseInt(reader.readLine()));
+				book.setBookType(reader.readLine());
+				if (searchingType.equals("name"))
+					if (book.getBookName().equals(param))
+						listBooks.add(book);
+				if (searchingType.equals("author"))
+					if (book.getAuthor().equals(param))
+						listBooks.add(book);
+				if (searchingType.equals("type"))
+					if (book.getBookType().equals(param))
+						listBooks.add(book);
+			}while(true);
+		}
+	    catch(FileNotFoundException ex){
+	    	throw new DAOException("File not found.", ex);
+	    } catch (IOException ex) {
+	    	throw new DAOException("Error during updating", ex);
+		}
+		return listBooks;
+	}
 }

@@ -160,6 +160,46 @@ public class Main {
 				}
 				break;
 			case "2":
+				System.out.println("====SEARCHING BOOKS====");
+				System.out.println("1-By the name");
+				System.out.println("2-By the author");
+				System.out.println("3-By the type (paper, ebook)");
+				action = scn.nextLine();
+				String paramType=null;
+				tempString="";
+				switch (action)
+				{
+					case "1":
+						paramType="name";
+						break;
+					case "2":
+						paramType="author";
+						break;
+					case "3":
+						paramType="type";
+						break;
+				}
+				System.out.println("Input your value");
+				tempString+=scn.nextLine();
+				response = controller.doAction("search_books|"+tempString+"|"+paramType);
+				if (response.equals(""))
+					System.out.println("There are not any books");
+				else
+				{
+					int bookCounter=1;
+					System.out.println("====SEARCHING RESULTS====");
+					String[] books = response.split("\\|");
+					for (String book : books)
+					{
+						String[] bookAttributes = book.split(",");
+						System.out.println(String.valueOf(bookCounter)+")"+bookAttributes[0]);
+						System.out.println(bookAttributes[1]);
+						System.out.println(bookAttributes[2]);
+						System.out.println(bookAttributes[3]);
+						bookCounter++;
+					}
+				}
+				break;
 			case "3":
 				tempString="";
 				System.out.println("1-Paper book");
