@@ -57,4 +57,21 @@ public class User {
 			role = "usr";
 		return getClass()+","+fullName+","+login+","+email+","+password+","+role;
 	}
+	
+	@Override
+	public boolean equals(Object obj) { 
+        if (obj == this) { 
+                return true; 
+        } 
+        if (obj == null || obj.getClass() != this.getClass()) { 
+                return false; 
+        } 
+
+        User user = (User) obj; 
+        return (isAdmin == user.getIsAdmin() 
+                && (fullName == user.fullName || (fullName != null &&fullName.equals(user.getFullName())))                
+                && (login == user.login  || (login != null && login .equals(user.getLogin())))
+                && (email == user.email  || (email != null && email .equals(user.getEmail())))
+                && (password == user.password  || (password != null && password .equals(user.getPassword())))); 
+    } 
 }

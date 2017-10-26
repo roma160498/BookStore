@@ -1,6 +1,5 @@
 package Controller.command.implementation;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -14,23 +13,23 @@ import Domain.User;
 public class UserLogCommand implements Command{
 	public String execute(String request) {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		
 		UserService service = serviceFactory.getUserService();
 		String response = null;
 		
 		try {
 			User user = service.authorize(request.split("\\|")[1],md5Hasher(request.split("\\|")[2]));
-			response = user.toString();
+			if (user!=null)
+				response = user.toString();
+			else
+				response = "User not found";
 		} catch (ServiceException e) {
 			
 			response = e.getMessage();
 		}
 		
 		return response;
-		
-	//	return null;
 	}
-	public static String md5Hasher(String string) {
+	private static String md5Hasher(String string) {
 	    MessageDigest messageDigest = null;
 	    byte[] digest = new byte[0];
 	 

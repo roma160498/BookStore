@@ -1,7 +1,3 @@
-AZAZAZAZAZA
-Пушкин
-1843
-ebook
 Цветы для элджернона
 Дэниэл Киз
 1968
@@ -45,4 +41,8 @@ ebook
 OLOLO
 1111
 2012
+paper
+DC Book
+Marvel
+2017
 paper

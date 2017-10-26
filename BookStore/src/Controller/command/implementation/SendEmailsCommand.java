@@ -9,7 +9,6 @@ import Service.UserService;
 import Service.exceptions.ServiceException;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.internet.*;
 import javax.mail.*;
@@ -18,11 +17,11 @@ public class SendEmailsCommand implements Command {
 
 	@Override
 	public String execute(String request) {
-		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		
+		ServiceFactory serviceFactory = ServiceFactory.getInstance();		
 		UserService service = serviceFactory.getUserService();
 		String response = null;
 		ArrayList<String> emailsList = null;
+		
 		final String[] paramsArray = request.split("\\|");
 		try {
 			emailsList= service.getEmails();
@@ -54,17 +53,17 @@ public class SendEmailsCommand implements Command {
 		try{
 			for (String email : emailsList)
 			{
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(paramsArray[1]));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-			message.setSubject("Пополнение книг в нашем магазине");
-			message.setText("Здравствуйте, в наш магаз поступила новая книга.\nНазвание: "+paramsArray[3]+"\nАвтор: "+paramsArray[4]
+				Message message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(paramsArray[1]));
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+				message.setSubject("Пополнение книг в нашем магазине");
+				message.setText("Здравствуйте, в наш магаз поступила новая книга.\nНазвание: "+paramsArray[3]+"\nАвтор: "+paramsArray[4]
 					+"\nГод издания: "+paramsArray[5]+"\nТип: "+role);
-			Transport.send(message);
+				Transport.send(message);
 			}
 			response = "OK";
 			}catch(Exception ex){
-			response = "Error";
+				response = "Error";
 		}
 		
 		

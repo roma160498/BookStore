@@ -5,6 +5,7 @@ import Controller.command.Command;
 public class Controller {
 
 	private final CommandProvider provider = new CommandProvider();	
+	
 	public String doAction(String request) {
 		String commandName;
 		commandName = request.split("\\|")[0];

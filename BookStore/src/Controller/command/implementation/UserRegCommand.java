@@ -13,14 +13,12 @@ import Domain.User;
 
 public class UserRegCommand implements Command{
 	public String execute(String request) {
-		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		
+		ServiceFactory serviceFactory = ServiceFactory.getInstance();		
 		UserService service = serviceFactory.getUserService();
 		String response = null;
 		
 		User user = new User();
-		String paramArray[] = request.split("\\|");
-		
+		String paramArray[] = request.split("\\|");		
 		user.setEmail(paramArray[2]);
 		user.setFullName(paramArray[1]);
 		user.setLogin(paramArray[3]);
@@ -29,15 +27,12 @@ public class UserRegCommand implements Command{
 		
 		try {
 			if (service.register(user))
-			response = user.toString();
+				response = "OK";
 		} catch (ServiceException ex) {
 			
-			response = "Error";
+			response = ex.getMessage();
 		}
-		
 		return response;
-		
-	//	return null;
 	}
 
 	private boolean parseBoolean(String string) {

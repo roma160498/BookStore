@@ -2,20 +2,17 @@ package Controller.command.implementation;
 
 import Service.BookService;
 import Service.ServiceFactory;
-import Service.UserService;
 import Service.exceptions.ServiceException;
 import Controller.command.Command;
 import Domain.Book;
-import Domain.Ebook;
-import Domain.PaperBook;
-import Domain.User;
 
 public class AddBookCommand implements Command{
 	public String execute(String request) {
-		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		
+		ServiceFactory serviceFactory = ServiceFactory.getInstance();		
 		BookService service = serviceFactory.getBookService();
 		String response = null;
+		
 		String paramArray[] = request.split("\\|");
 		{
 			Book book = new Book();
@@ -28,16 +25,12 @@ public class AddBookCommand implements Command{
 				book.setBookType("ebook");
 			try{
 				service.addBook(book);
-				return "OK";
+				response = "OK";
 			}
-			catch (ServiceException ex)
-			{ 
-				return ex.getMessage();
+			catch (ServiceException ex){ 
+				response= ex.getMessage();
 			}
 		}
-		
-		//return response;
-		
-	//	return null;
+		return response;
 	}
 }

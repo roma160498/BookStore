@@ -43,34 +43,36 @@ public class UserDAO {
 
 	public User authirize(String login, String password) throws DAOException {
 		User user = new User();
+		boolean isExist=false;
 		try(BufferedReader reader = new BufferedReader(new FileReader("users.txt")))
 		{
-			boolean isExist=false;
-			String role;
+			String name,role;
 			do{
-				user.setFullName(reader.readLine());
+				name =reader.readLine();
+				if (name==null)
+					break;
+				user.setFullName(name);
 				user.setEmail(reader.readLine());
 				user.setLogin(reader.readLine());
 				user.setPassword(reader.readLine());
 				role = reader.readLine();
-				if (role!=null)
-				{
-					if(role.equals("adm"))
-						user.setIsAdmin(true);
-					if(role.equals("usr"))
-						user.setIsAdmin(false);
-				}
-				else{
-					throw new DAOException("User not found");
-				}
-				if (user.getLogin().equals(login) && user.getPassword().equals(password))
+				if(role.equals("adm"))
+					user.setIsAdmin(true);
+				if(role.equals("usr"))
+					user.setIsAdmin(false);
+				if (user.getLogin().equals(login) && user.getPassword().equals(password)){
 					isExist=true;
-			}while (!isExist);
+					break;
+				}
+			}while (true);
 		}
 		catch (IOException ex) {
 			throw new DAOException("Opening file exception", ex);
 		}
-		return user;
+		if (isExist)
+			return user;
+		else
+			return null;
 	}
 	
 	public ArrayList<String> getEmails() throws DAOException {

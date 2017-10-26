@@ -1,6 +1,5 @@
 package Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import DAO.DAOFactory;
@@ -15,11 +14,10 @@ public class UserService {
 		DAOFactory factory = DAOFactory.getInstance();
 		UserDAO userDAO = factory.getUserDAO();
 		try {
-			userDAO.register(user);
+			return userDAO.register(user);
 		} catch (DAOException ex) {
 			throw new ServiceException("File not found.", ex);
 		}
-		return true;
 	}
 
 	public User authorize(String login, String password) throws ServiceException {
